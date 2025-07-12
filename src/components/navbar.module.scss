@@ -1,0 +1,23 @@
+.navbar {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: auto auto;
+
+  height: 64px;
+
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 0 3rem;
+  z-index: 1;
+}
+
+.navbar_left {
+  grid-column: 1;
+}
+
+.navbar_right {
+  grid-column: 2;
+
+  text-align: right;
+}

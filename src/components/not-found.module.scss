@@ -1,0 +1,102 @@
+.not_found {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  margin: 5rem auto;
+
+  max-width: 960px;
+}
+
+.container {
+  position: relative;
+
+  border-top: 1px dotted #00000015;
+  border-left: 1px dotted #00000015;
+
+  flex: 1;
+
+  &:before {
+    position: absolute;
+    display: block;
+
+    content: '';
+    border: 1px dotted #00000015;
+
+    left: -4em;
+    top: -4em;
+    height: 8em;
+    width: 8em;
+  }
+}
+
+.greetings {
+  position: relative;
+  display: inline-block;
+
+  font-family: var(--font-schoolbell);
+  font-size: max(2rem, min(3.5vw, 2.5rem));
+  color: #903;
+
+  padding: 0 1rem;
+  margin-bottom: -1rem;
+
+  transform: rotate(-10deg) translate(-.5rem, 0);
+  transform-origin: 0;
+
+  z-index: 99;
+}
+
+.not_found_text {
+  position: relative;
+
+  background: var(--text-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-weight: 800;
+  font-size: max(3rem, min(5vw, 4.5rem));
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+
+  padding: 1rem;
+}
+
+.not_found_shrug {
+  position: relative;
+
+  font-weight: 800;
+  font-size: max(3rem, min(5vw, 4.5rem));
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+
+  color: #903;
+  text-align: center;
+}
+
+.not_found_desc {
+  font-size: max(1rem, min(2vw, 1.375rem));
+
+  color: #666;
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+
+  padding: 1rem 1rem 2rem 1rem;
+
+  p {
+    text-align: justify;
+    margin-bottom: 1rem;
+  }
+}
+
+.not_found_actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 5rem 1rem 1rem;
+
+  gap: 1rem;
+}
+

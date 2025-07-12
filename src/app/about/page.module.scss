@@ -1,0 +1,76 @@
+.stack {
+  flex-direction: row;
+  text-align: justify;
+  align-self: center;
+
+  max-width: 800px;
+
+  margin-bottom: 3rem;
+}
+
+.about {
+  font-size: 1.1rem;
+  color: #222;
+
+  padding: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+    color: #903;
+  }
+
+  p {
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+.quote {
+  font-family: var(--font-schoolbell);
+  font-size: 1.625rem;
+  font-style: italic;
+
+  text-align: center;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.quote_content {
+  position: relative;
+  display: inline-block;
+
+  &::before {
+    position: absolute;
+    display: block;
+    content: '"';
+
+    color: #903;
+    font-size: 2em;
+    left: -.5em;
+    top: -.5em;
+  }
+
+  &::after {
+    position: absolute;
+    display: block;
+    content: '"';
+
+    color: #903;
+    font-size: 2em;
+    right: -.5em;
+    bottom: -.5em;
+  }
+}
+
+.quote_attr {
+  color: #000;
+}

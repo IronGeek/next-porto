@@ -1,0 +1,55 @@
+.stack {
+  flex-direction: row;
+  text-align: justify;
+  align-self: center;
+
+  margin-bottom: 3rem;
+}
+
+.projects {
+  font-size: 1.1rem;
+  color: #222;
+
+  padding: 2rem;
+  width: 100%;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+    color: #903;
+  }
+
+  p {
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+.project_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.project_item {
+  display: block;
+
+  border: 1px dotted #eee;
+  border-radius: .5rem;
+
+  padding: 1rem;
+}
+
+.project_name {
+  font-weight: bold;
+}

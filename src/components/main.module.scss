@@ -1,0 +1,7 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+
+  min-height: calc(100% - 64px - 80px); /* navbar: 64px, footer: 81px */
+}

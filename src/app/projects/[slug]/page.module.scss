@@ -1,0 +1,43 @@
+.stack {
+  flex-direction: row;
+  text-align: justify;
+  align-self: center;
+
+  margin-bottom: 3rem;
+
+  max-width: 800px;
+}
+
+.project_links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+
+.project_name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+
+  color: #903;
+}
+
+.project_definition {
+  clear: both;
+  text-align: start;
+
+  border-top: 1px dotted #eee;
+  padding-top: 2rem;
+
+  dt {
+    font-weight: bold;
+    margin-bottom: .5rem;
+  }
+
+  dd {
+    margin-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
