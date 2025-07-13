@@ -24,7 +24,7 @@ const PageMenu = ({ className, ...props }: PageMenuProps) => {
         <Link className={linkClass('/profile')} href="/profile">Profile</Link>
       </li>
       <li className={styles.menu_item}>
-        <Link className={linkClass('/project')} href="/projects">Projects</Link>
+        <Link className={linkClass('/projects')} href="/projects">Projects</Link>
       </li>
       <li className={styles.menu_item}>
         <Link className={linkClass('/contact')} href="/contact">Contact</Link>

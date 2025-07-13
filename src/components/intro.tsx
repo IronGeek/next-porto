@@ -15,8 +15,8 @@ const Intro = () => {
         <div className={styles.intro_bio}>
           <p className="dropcap">
             A passionate <strong>full-stack developer</strong> with a keen eye for <strong>detail</strong> and a love for <strong>creating intuitive user experiences</strong>.
-            Fascinated for how code can <strong>bring ideas to life</strong>. I thrive on <strong>solving complex problems</strong> and constantly exploring new technologies to
-            <strong>deliver innovative and efficient solutions</strong>.
+            Fascinated for how code can <strong>bring ideas to life</strong>. I thrive on <strong>solving complex problems</strong> and constantly exploring new technologies
+            to <strong>deliver innovative and efficient solutions</strong>.
           </p>
           <p>
             When I'm not coding, you can find me sketching out new app ideas or vibing the latest design trends.
