@@ -14,9 +14,9 @@
   width: 100%;
 
   h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    font-family: var(--font-schoolbell);
+    font-size: 3rem;
+    margin-bottom: 2rem;
 
     color: #903;
   }
@@ -36,7 +36,7 @@
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
 
-  gap: 1rem;
+  gap: 2rem;
 
   width: 100%;
 }
@@ -44,12 +44,31 @@
 .project_item {
   display: block;
 
-  border: 1px dotted #eee;
+  border: 1px dashed #ddd;
   border-radius: .5rem;
+  overflow: hidden;
 
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.1);
+
+  width: 300px;
+
+  transition: transform .2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 .5rem .75rem rgba(0, 0, 0, 0.1);
+
+    transform: translate(0, -2rem) rotate(-5deg);
+  }
+}
+
+.project_body {
+  border-top: 1px dashed #ddd;
   padding: 1rem;
+
+  text-align: start;
 }
 
 .project_name {
   font-weight: bold;
+  margin-bottom: 1rem;
 }

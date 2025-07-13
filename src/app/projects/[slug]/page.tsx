@@ -1,10 +1,11 @@
 "use client";
 
-import { useParams } from 'next/navigation'
+import { useParams, notFound } from 'next/navigation'
 import Link from 'next/link';
 
 import { Main } from '@/components/main';
 import { Stack } from '@/components/stack';
+import { Tags } from '@/components/tags';
 
 import styles from './page.module.scss';
 import { projects } from '@/lib/data';
@@ -12,6 +13,8 @@ import { projects } from '@/lib/data';
 const ProjectPage = () => {
   const params = useParams()
   const project = projects.find((prj) => prj.slug === params.slug);
+  if (!project) { return notFound() }
+
   const index = projects.indexOf(project);
   const prev_project = index > 0 ? projects[index - 1] : null;
   const next_project = index < projects.length -1 ? projects[index + 1] : null;
@@ -32,8 +35,8 @@ const ProjectPage = () => {
             <dd>{project.description}</dd>
             <dt>Role</dt>
             <dd>{project.role}</dd>
-            <dt>Technologu Used</dt>
-            <dd>{project.techstack.join(', ')}</dd>
+            <dt>Technology Used</dt>
+            <dd><Tags tags={project.technologies} /></dd>
           </dl>
         </div>
       </Stack>
