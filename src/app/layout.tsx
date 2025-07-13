@@ -3,9 +3,9 @@ import { clsx } from 'clsx';
 import { fonts } from '@/app/fonts';
 import { Layout } from '@/components/layout';
 
-import '@/app/globals.css';
+import '@/app/globals.scss';
 
-const RootLayout = async ({ children }) => {
+const RootLayout = ({ children }) => {
   return (
     <html
       className={clsx(fonts.variable, 'antialiased')}
