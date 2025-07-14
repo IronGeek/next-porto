@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 
+import { GitHubIcon } from '@/components/icons';
+
 import type { HTMLAttributes } from 'react';
 
 import styles from './pagemenu.module.scss';
@@ -24,19 +26,22 @@ const PageMenu = ({ className, ...props }: PageMenuProps) => {
   return (
     <ol {...props} className={clsx(styles.menu, className)}>
       <li className={styles.menu_item}>
-        <Link className={linkClass('/')} href="/">Home</Link>
+        <Link title="Home" className={linkClass('/')} href="/">Home</Link>
       </li>
       <li className={styles.menu_item}>
-        <Link className={linkClass('/profile')} href="/profile">Profile</Link>
+        <Link title="Profile" className={linkClass('/profile')} href="/profile">Profile</Link>
       </li>
       <li className={styles.menu_item}>
-        <Link className={linkClass('/projects', true)} href="/projects">Projects</Link>
+        <Link title="Projects" className={linkClass('/projects', true)} href="/projects">Projects</Link>
       </li>
       <li className={styles.menu_item}>
-        <Link className={linkClass('/contact')} href="/contact">Contact</Link>
+        <Link title="Contact" className={linkClass('/contact')} href="/contact">Contact</Link>
       </li>
       <li className={styles.menu_item}>
-        <Link className={linkClass('/about')} href="/about">About</Link>
+        <Link title="About" className={linkClass('/about')} href="/about">About</Link>
+      </li>
+      <li className={styles.menu_item}>
+        <Link title="Repository" target="_blank" href="https://github.com/IronGeek/next-porto"><GitHubIcon size="1.5em" /></Link>
       </li>
     </ol>
   );

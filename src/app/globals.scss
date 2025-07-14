@@ -14,11 +14,12 @@ body { min-height:100% }
 :root {
   --app-navbar-height: 4rem;
   --app-footer-height: 5rem;
+  --app-text-gradient: linear-gradient(180deg, #555555, #000000);
+  --app-primary-color: #222;
 }
 
 .gradient-text {
-  --text-gradient: linear-gradient(180deg, #555555, #000000);
-  background: var(--text-gradient);
+  background: var(--app-text-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -26,14 +27,23 @@ body { min-height:100% }
 
 button, a[href] {
   &.button {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: .5rem;
+
     cursor: pointer;
 
     border-radius: .5rem;
-    border: 1px solid #00000014;
-    padding: .5rem 1rem;
+    border: 1px solid #22222214;
+    padding: .375rem 1rem .5rem 1rem;
+
+    &> svg {
+      margin-bottom: -.125rem;
+    }
 
     &.primary {
-      background-color: #171717;
+      background-color: var(--app-primary-color);
       color: #fff;
 
       &:hover {
@@ -43,7 +53,7 @@ button, a[href] {
 
     &.secondary {
       &:hover {
-        background-color: #00000015;
+        background-color: rgba(34, 34, 34, 0.082);
       }
     }
   }

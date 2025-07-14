@@ -47,11 +47,6 @@
 .not_found_text {
   position: relative;
 
-  background: var(--text-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
   font-weight: 800;
   font-size: max(3rem, min(5vw, 4.5rem));
   line-height: 1.2;

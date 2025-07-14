@@ -1,11 +1,12 @@
 import clsx from 'clsx';
-import { notFound } from 'next/navigation';
+import Link from 'next/link';
+
+import { NextIcon, PrevIcon } from '@/components/icons';
 
 import styles from './project-navigation.module.scss';
 
 import type { ComponentProps } from 'react';
 import type { Project } from '@/lib/data';
-import Link from 'next/link';
 
 type ProjectNavigationProps = ComponentProps<'div'> & {
   readonly data: Project[]
@@ -21,8 +22,8 @@ const ProjectNavigation = ({ className, data, current, ...props }: ProjectNaviga
 
   return (
     <div {...props} className={clsx(styles.navigation, className)}>
-      { prev ? <Link href={"/projects/" + prev.slug}>🡠 {prev.name}</Link> : <div></div> }
-      { next ? <Link href={"/projects/" + next.slug}>{next.name} 🡢</Link> : <div></div> }
+      { prev ? <Link className={styles.link} href={"/projects/" + prev.slug}><PrevIcon /> {prev.name}</Link> : <div></div> }
+      { next ? <Link className={styles.link} href={"/projects/" + next.slug}>{next.name} <NextIcon /></Link> : <div></div> }
     </div>
   )
 }

@@ -1,8 +1,10 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 import Link from 'next/link';
 
+import { ContactIcon, DownloadIcon, ProfileIcon } from '@/components/icons';
+
 import styles from './intro.module.scss';
-import Image from 'next/image';
 
 const Intro = () => {
   return (
@@ -18,7 +20,7 @@ const Intro = () => {
       <div className={styles.container}>
         <div className={styles.greetings}>Hey, it's Me...!</div>
         <h1 className={clsx(styles.intro_name, "gradient-text text-center lg:text-start")}>Justin Case</h1>
-        <h2 className={clsx(styles.intro_title, "text-center ld:text-start")}>Full-Stack Developer & UI/UX Enthusiast</h2>
+        <h2 className={clsx(styles.intro_title, "text-center lg:text-start")}>Full-Stack Developer & UI/UX Enthusiast</h2>
         <div className={clsx(styles.intro_bio, "dropcap")}>
           <p>
             A passionate <strong>full-stack developer</strong> with a keen eye for <strong>detail</strong> and a love for <strong>creating intuitive user experiences</strong>.
@@ -32,13 +34,13 @@ const Intro = () => {
         </div>
         <div className={clsx(styles.intro_actions, "flex-col sm:flex-row items-stretch text-center")}>
           <Link className="button primary" href="/profile">
-            Full Profile
+            <ProfileIcon /> Full Profile
           </Link>
           <Link className="button secondary" href="/profile">
-            Download CV
+            <DownloadIcon /> Download CV
           </Link>
           <Link className="button secondary" href="/contact">
-            Contact Me
+            <ContactIcon /> Contact Me
           </Link>
         </div>
       </div>

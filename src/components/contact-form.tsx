@@ -4,6 +4,7 @@ import { ComponentProps, isValidElement, ReactNode, useState } from 'react';
 
 import styles from './contact-form.module.scss';
 import clsx from 'clsx';
+import { RequiredIcon, SendEmailIcon } from '@/components/icons';
 
 type ContactFormProps = Omit<ComponentProps<'div'>, 'title'> & {
   readonly title?: ReactNode
@@ -41,7 +42,7 @@ const ContactForm = ({ className, title, description, ...props }: ContactFormPro
         : <div className={styles.contactForm_desc}>{ description || 'Have a question or want to work together? Send me a message!' } </div> }
       <form onSubmit={handleSubmit}>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="name">Your Name</label>
+          <label htmlFor="name">Your Name <RequiredIcon color="#903" size=".5em" /></label>
           <input
             type="text"
             id="name"
@@ -53,7 +54,7 @@ const ContactForm = ({ className, title, description, ...props }: ContactFormPro
           />
         </div>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="email">Your Email</label>
+          <label htmlFor="email">Your Email <RequiredIcon color="#903" size=".5em" /></label>
           <input
             type="email"
             id="email"
@@ -65,7 +66,7 @@ const ContactForm = ({ className, title, description, ...props }: ContactFormPro
           />
         </div>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="subject">Subject</label>
+          <label htmlFor="subject">Subject <RequiredIcon color="#903" size=".5em" /></label>
           <input
             type="text"
             id="subject"
@@ -77,7 +78,7 @@ const ContactForm = ({ className, title, description, ...props }: ContactFormPro
           />
         </div>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="message">Your Message</label>
+          <label htmlFor="message">Your Message <RequiredIcon color="#903" size=".5em" /></label>
           <textarea
             id="message"
             name="message"
@@ -88,7 +89,7 @@ const ContactForm = ({ className, title, description, ...props }: ContactFormPro
           ></textarea>
         </div>
         <div className={clsx(styles.contactFormGroup, "text-center")}>
-          <button type="submit" className="button primary">Send Message</button>
+          <button type="submit" className="button primary"><SendEmailIcon /> Send Message</button>
         </div>
       </form>
     </div>

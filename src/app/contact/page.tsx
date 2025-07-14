@@ -18,7 +18,7 @@ const ContactPage = () => {
           </div>
           <ContactList />
         </div>
-        <ContactForm className="min-w-xs" />
+        <ContactForm className="min-w-xs md:-mt-26" />
       </div>
     </Main>
   )
