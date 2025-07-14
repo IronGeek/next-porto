@@ -1,0 +1,39 @@
+.project {
+  display: block;
+
+  border: 1px dashed #ddd;
+  border-radius: .5rem;
+  overflow: hidden;
+
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.1);
+
+  width: 300px;
+
+  transition: transform .2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 .5rem .75rem rgba(0, 0, 0, 0.1);
+
+    transform: translate(0, -2rem) rotate(-5deg);
+    z-index: 1;
+  }
+}
+
+.project_body {
+  cursor: pointer;
+
+  border-top: 1px dashed #ddd;
+  padding: 1rem;
+
+  text-align: start;
+}
+
+.project_name {
+  font-size: 1.375em;
+  font-weight: bold;
+}
+
+.project_title {
+  font-size: 1.125em;
+  color: #222;
+}

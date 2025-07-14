@@ -1,10 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { ComponentProps, isValidElement, ReactNode, useState } from 'react';
 
 import styles from './contact-form.module.scss';
+import clsx from 'clsx';
 
-const ContactForm = () => {
+type ContactFormProps = Omit<ComponentProps<'div'>, 'title'> & {
+  readonly title?: ReactNode
+  readonly description?: ReactNode
+}
+
+const ContactForm = ({ className, title, description, ...props }: ContactFormProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,9 +32,13 @@ const ContactForm = () => {
   };
 
   return (
-    <div className={styles.contactForm}>
-      <h2>Get in Touch</h2>
-      <p>Have a question or want to work together? Send me a message!</p>
+    <div {...props} className={clsx(styles.contactForm, className)}>
+      { isValidElement(title)
+        ? title
+        : <h2 className={styles.contactForm_title}>{title || 'Get in Touch'}</h2> }
+      { isValidElement(description)
+        ? description
+        : <div className={styles.contactForm_desc}>{ description || 'Have a question or want to work together? Send me a message!' } </div> }
       <form onSubmit={handleSubmit}>
         <div className={styles.contactFormGroup}>
           <label htmlFor="name">Your Name</label>
@@ -71,14 +81,15 @@ const ContactForm = () => {
           <textarea
             id="message"
             name="message"
-            rows={6}
             placeholder="Hi Justin, I'd like to discuss a potential project..."
             value={formData.message}
             onChange={handleChange}
             required
           ></textarea>
         </div>
-        <button type="submit" className="button primary">Send Message</button>
+        <div className={clsx(styles.contactFormGroup, "text-center")}>
+          <button type="submit" className="button primary">Send Message</button>
+        </div>
       </form>
     </div>
   );

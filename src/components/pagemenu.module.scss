@@ -12,6 +12,12 @@
 
 .menu_item {
   position: relative;
+
+  a:hover {
+    text-decoration: underline;
+    text-decoration-color: #903;
+    text-decoration-style: wavy;
+  }
 }
 
 .menu_item_active {

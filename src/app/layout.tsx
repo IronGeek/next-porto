@@ -1,11 +1,16 @@
 import { clsx } from 'clsx';
+import { headers } from 'next/headers';
 
 import { fonts } from '@/app/fonts';
 import { Layout } from '@/components/layout';
 
 import '@/app/globals.scss';
 
-const RootLayout = ({ children }) => {
+const RootLayout = async ({ children }) => {
+  const headersList = await headers();
+  const pathname = headersList.get("x-invoke-path") || "";
+  console.log(pathname);
+
   return (
     <html
       className={clsx(fonts.variable, 'antialiased')}
@@ -13,6 +18,7 @@ const RootLayout = ({ children }) => {
       dir="ltr"
       suppressHydrationWarning>
       <body>
+        {pathname}
         <Layout>
           {children}
         </Layout>

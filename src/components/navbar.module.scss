@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: auto auto;
 
-  height: 64px;
+  height: var(--app-navbar-height, 4rem);
 
   background-color: #fff;
   border-bottom: 1px solid #eee;

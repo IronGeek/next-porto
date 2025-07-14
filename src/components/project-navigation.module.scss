@@ -1,0 +1,14 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 1.1em;
+  margin-bottom: 3rem;
+
+  a:hover {
+    text-decoration: underline;
+    text-decoration-color: #903;
+    text-decoration-style: wavy;
+  }
+}

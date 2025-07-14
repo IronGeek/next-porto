@@ -13,7 +13,13 @@ type PageMenuProps = HTMLAttributes<HTMLOListElement> & {
 
 const PageMenu = ({ className, ...props }: PageMenuProps) => {
   const pathname = usePathname()
-  const linkClass = (path) => pathname === path ? styles.menu_item_active : '';
+  const linkClass = (path: string, prefix?: boolean) => {
+    if (prefix) {
+      return pathname.startsWith(path) ? styles.menu_item_active : '';
+    }
+
+    return pathname === path ? styles.menu_item_active : '';
+  }
 
   return (
     <ol {...props} className={clsx(styles.menu, className)}>
@@ -24,7 +30,7 @@ const PageMenu = ({ className, ...props }: PageMenuProps) => {
         <Link className={linkClass('/profile')} href="/profile">Profile</Link>
       </li>
       <li className={styles.menu_item}>
-        <Link className={linkClass('/projects')} href="/projects">Projects</Link>
+        <Link className={linkClass('/projects', true)} href="/projects">Projects</Link>
       </li>
       <li className={styles.menu_item}>
         <Link className={linkClass('/contact')} href="/contact">Contact</Link>

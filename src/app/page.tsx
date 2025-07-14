@@ -3,7 +3,7 @@ import { Main } from '@/components/main';
 
 const IndexPage = () => {
   return (
-    <Main alignCenter>
+    <Main className="justify-center">
       <Intro />
     </Main>
   )

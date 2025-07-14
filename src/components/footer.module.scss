@@ -1,5 +1,5 @@
 .footer {
-  height: 80px;
+  height: var(--app-footer-height, 5rem);
 
   padding: 1rem;
 

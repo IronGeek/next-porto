@@ -1,34 +1,3 @@
-.stack {
-  flex-direction: row;
-  text-align: center;
-  align-self: center;
-
-  margin-bottom: 3rem;
-  gap: 3rem;
-
-  max-width: 960px;
-}
-
-.contact {
-  font-size: 1.1rem;
-  color: #222;
-
-  border-right: 1px dotted #eee;
-  padding-right: 3rem;
-
-  max-width: 400px;
-
-  p {
-    font-size: 1.375rem;
-    font-style: italic;
-    text-align: justify;
-
-    &:last-of-type {
-      margin-bottom: 2rem;
-    }
-  }
-}
-
 .contact_list {
   clear: both;
   text-align: start;
@@ -62,8 +31,7 @@
 
 .contact_image {
   margin: 0 auto;
-  margin-bottom: 2rem;
-
+  margin-bottom: 1rem;
 
   border: 1px dotted #eee;
   border-radius: 2rem .5rem;

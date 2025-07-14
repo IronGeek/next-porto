@@ -11,6 +11,11 @@
 html { height:100% }
 body { min-height:100% }
 
+:root {
+  --app-navbar-height: 4rem;
+  --app-footer-height: 5rem;
+}
+
 .gradient-text {
   --text-gradient: linear-gradient(180deg, #555555, #000000);
   background: var(--text-gradient);
@@ -45,8 +50,7 @@ button, a[href] {
 }
 
 .dropcap {
-  &:first-child:first-letter {
-
+  &>p:first-child:first-letter {
     font-family: var(--font-schoolbell);
     font-size: 3em;
     line-height: 1;
@@ -55,10 +59,22 @@ button, a[href] {
     float: left;
 
     padding-right: 1rem;
-    padding-top: .75rem;
-    margin-bottom: -0.25rem
+    padding-top: 0.1em;
+    margin-bottom: -0.25em
   }
 }
+
+.potrait {
+  margin: 0 auto;
+  margin-bottom: 1rem;
+
+  border: 1px dotted #eee;
+  border-radius: 2rem .5rem;
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.1);
+
+  padding: .5rem;
+}
+
 
 .separator {
   position: relative;
@@ -66,6 +82,9 @@ button, a[href] {
   font-family: var(--font-mono);
   color: #ccc;
   letter-spacing: 2px;
+
+  height: 100%;
+  overflow: hidden;
 
   &:before {
     position: absolute;

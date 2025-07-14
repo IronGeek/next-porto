@@ -1,36 +1,31 @@
 .contactForm {
   background-color: #ffffff;
   padding: 2rem;
-  border: 1px dotted #eee;
+  border: 1px dotted #ddd;
   border-radius: .75rem;
   box-shadow: 0 .5rem .75rem rgba(0, 0, 0, 0.1);
 
   width: 100%;
-  min-width: 360px;
+}
 
-  h2 {
-    font-size: 2.2em;
-    color: #2c3e50;
-    /* Dark blue-gray for heading */
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
+.contactForm_title {
+  font-size: 2.2em;
+  color: #903;
+}
 
-  p {
-    font-size: 1.1em;
-    color: #666;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-  }
+.contactForm_desc {
+  color: #666;
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
 .contactFormGroup {
-  margin-bottom: 20px;
-  text-align: left;
+  margin-bottom: 1rem;
 
   label {
     display: block;
-    font-weight: 400;
+    font-weight: bold;
     color: #222;
 
     margin-bottom: .5rem;
@@ -44,8 +39,7 @@
 
   textarea {
     resize: vertical;
-    /* Allow vertical resizing of textarea */
-    min-height: 120px;
+    min-height: 8rem;
   }
 
   input[type="text"],
@@ -64,33 +58,11 @@
   input[type="email"]:focus,
   textarea:focus {
     border-color: #903;
-    /* Blue on focus */
     box-shadow: 0 0 0 3px rgba(153, 0, 51, 0.2);
     outline: none;
   }
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .contactForm {
-    padding: 30px 20px;
-    margin: 20px;
-
-    h2 {
-      font-size: 1.8em;
-    }
-
-    p {
-      font-size: 0.95em;
-    }
-  }
-
-  .contactFormGroup {
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: calc(100% - 20px);
-      /* Re-adjust for smaller screens */
-    }
-  }
+.submitButton {
+  align-self: center;
 }
