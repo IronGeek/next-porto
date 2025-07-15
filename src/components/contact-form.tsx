@@ -4,7 +4,7 @@ import { ComponentProps, isValidElement, ReactNode, useState } from 'react';
 
 import styles from './contact-form.module.scss';
 import clsx from 'clsx';
-import { RequiredIcon, SendEmailIcon } from '@/components/icons';
+import { RequiredIcon, SendEmailIcon } from '@/ui/icons';
 
 type ContactFormProps = Omit<ComponentProps<'div'>, 'title'> & {
   readonly title?: ReactNode

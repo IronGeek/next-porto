@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ContactIcon, DownloadIcon, ProfileIcon } from '@/components/icons';
+import { ContactIcon, DownloadIcon, ProfileIcon } from '@/ui/icons';
 
 import styles from './intro.module.scss';
 

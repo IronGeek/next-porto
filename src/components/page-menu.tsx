@@ -4,11 +4,11 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 
-import { GitHubIcon } from '@/components/icons';
+import { GitHubIcon } from '@/ui/icons';
 
 import type { HTMLAttributes } from 'react';
 
-import styles from './pagemenu.module.scss';
+import styles from './page-menu.module.scss';
 
 type PageMenuProps = HTMLAttributes<HTMLOListElement> & {
 };

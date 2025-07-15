@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { PageMenu } from '@/components/pagemenu';
+import { PageMenu } from '@/components/page-menu';
 
 import type { HTMLProps } from 'react';
 

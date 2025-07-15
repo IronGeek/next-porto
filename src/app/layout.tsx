@@ -1,6 +1,5 @@
 import { clsx } from 'clsx';
-import { fonts } from '@/app/fonts';
-import { Layout } from '@/components/layout';
+import { fonts } from '@/ui/fonts';
 
 import '@/app/globals.scss';
 
@@ -11,9 +10,7 @@ const RootLayout = ({ children }) => {
       lang="en"
       dir="ltr">
       <body>
-        <Layout>
-          {children}
-        </Layout>
+        {children}
       </body>
     </html>
   )

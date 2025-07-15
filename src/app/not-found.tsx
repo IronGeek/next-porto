@@ -3,7 +3,7 @@ import { Main } from '@/components/main';
 
 const NotFoundPage = () => {
   return (
-    <Main className="justify-center">
+    <Main fullscreen className="justify-center">
       <NotFound />
     </Main>
   )

@@ -6,7 +6,6 @@
   padding: 3rem;
 
   max-width: 96rem;
-  min-height: calc(100% - var(--app-navbar-height) - var(--app-footer-height));
 
   p {
     font-size: 1.25rem;
@@ -17,6 +16,10 @@
     &:last-of-type {
       margin-bottom: 2rem;
     }
+  }
+
+  &:not(.fullscreen) {
+    min-height: calc(100% - var(--app-navbar-height) - var(--app-footer-height));
   }
 }
 

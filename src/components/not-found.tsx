@@ -10,11 +10,9 @@ const NotFound = () => {
       <h1 className={styles.not_found_shrug}>¯\_(ツ)_/¯</h1>
       <h1 className={clsx(styles.not_found_text, "gradient-text sm:text-center")}>Sorry, but this is not the page you're looking for!</h1>
       <div className={styles.not_found_desc}>
-        <p>
-          The resource you requested may have been permanently removed, or moved to another location,
-          or temporarily unavailable at this time, or it never existed in the first place.
-          Please, check back again later!
-        </p>
+        The resource you requested may have been permanently removed, or moved to another location,
+        or temporarily unavailable at this time, or it never existed in the first place.
+        Please, check back again later!
       </div>
       <div className={clsx(styles.not_found_actions, "flex-col sm:flex-row items-stretch sm:items-center text-center")}>
         <Link className="button primary" href="/">

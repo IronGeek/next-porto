@@ -13,17 +13,19 @@
 
   flex: 1;
 
+  margin: 2rem;
+
   &:before {
     position: absolute;
     display: block;
 
     content: '';
     border: 1px dotted #00000015;
-
-    left: -4em;
-    top: -4em;
-    height: 8em;
-    width: 8em;
+border-radius: 50%;
+    left: -3.5em;
+    top: -3.5em;
+    height: 7em;
+    width: 7em;
   }
 }
 
@@ -66,7 +68,7 @@
   color: #903;
   text-align: center;
 
-  margin: 1rem 0;
+  margin-top: -1rem;
 }
 
 .not_found_desc {

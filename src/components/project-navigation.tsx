@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { NextIcon, PrevIcon } from '@/components/icons';
+import { NextIcon, PrevIcon } from '@/ui/icons';
 
 import styles from './project-navigation.module.scss';
 

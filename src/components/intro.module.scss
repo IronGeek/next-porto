@@ -4,29 +4,13 @@
   align-items: center;
   gap: 2rem;
 
-  margin: 5rem auto;
+  margin-top: 1.5rem;
 }
 
 .container {
   position: relative;
 
-  border-top: 1px dotted #00000015;
-  border-left: 1px dotted #00000015;
-
   flex: 1;
-
-  &:before {
-    position: absolute;
-    display: block;
-
-    content: '';
-    border: 1px dotted #00000015;
-
-    left: -4em;
-    top: -4em;
-    height: 8em;
-    width: 8em;
-  }
 }
 
 .profile_image {
@@ -59,12 +43,12 @@
   line-height: 1.2;
   letter-spacing: -0.01em;
 
-  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .intro_title {
   font-size: max(1.25rem, min(2.5vw, 1.75rem));
-  padding: 0 1rem 1rem 1rem;
+  margin-bottom: 2rem;
 }
 
 .intro_bio {
@@ -72,8 +56,6 @@
 
   color: #666;
   letter-spacing: -0.01em;
-
-  padding: 1rem 1rem 2rem 1rem;
 
   p {
     text-align: justify;
