@@ -13,10 +13,10 @@ type ContactFormProps = Omit<ComponentProps<'div'>, 'title'> & {
 
 const ContactForm = ({ className, title, description, ...props }: ContactFormProps) => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    subject: '',
-    message: ''
+    message: '',
+    name: '',
+    subject: ''
   });
 
   const handleChange = (e) => {
@@ -28,8 +28,15 @@ const ContactForm = ({ className, title, description, ...props }: ContactFormPro
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // eslint-disable-next-line no-alert
     alert('Message sent successfully! (Don\'t worry this is a mock submission)');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+
+    setFormData({
+      email: '',
+      message: '',
+      name: '',
+      subject: ''
+    });
   };
 
   return (

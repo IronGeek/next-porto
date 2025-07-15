@@ -22,8 +22,8 @@ const ProjectNavigation = ({ className, data, current, ...props }: ProjectNaviga
 
   return (
     <div {...props} className={clsx(styles.navigation, className)}>
-      { prev ? <Link className={styles.link} href={"/projects/" + prev.slug}><PrevIcon /> {prev.name}</Link> : <div></div> }
-      { next ? <Link className={styles.link} href={"/projects/" + next.slug}>{next.name} <NextIcon /></Link> : <div></div> }
+      { prev ? <Link className={styles.link} href={`/projects/${prev.slug}`}><PrevIcon /> {prev.name}</Link> : <div></div> }
+      { next ? <Link className={styles.link} href={`/projects/${next.slug}`}>{next.name} <NextIcon /></Link> : <div></div> }
     </div>
   )
 }

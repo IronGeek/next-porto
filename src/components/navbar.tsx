@@ -9,20 +9,18 @@ import styles from './navbar.module.scss';
 type NavbarProps = HTMLProps<HTMLDivElement> & {
 };
 
-const Navbar = ({ className, ...props }: NavbarProps) => {
-  return (
-    <div
-      {...props}
-      className={clsx(styles.navbar, className)}
-    >
-      <div className={styles.navbar_left}>
-      </div>
-      <div className={styles.navbar_right}>
-        <PageMenu />
-      </div>
+const Navbar = ({ className, ...props }: NavbarProps) => (
+  <div
+    {...props}
+    className={clsx(styles.navbar, className)}
+  >
+    <div className={styles.navbar_left}>
     </div>
-  );
-};
+    <div className={styles.navbar_right}>
+      <PageMenu />
+    </div>
+  </div>
+);
 
 export { Navbar };
 export type { NavbarProps };

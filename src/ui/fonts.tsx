@@ -1,27 +1,28 @@
-import { Andika, MuseoModerno, M_PLUS_1_Code, Schoolbell } from 'next/font/google'
+// eslint-disable-next-line camelcase
+import { Andika, M_PLUS_1_Code, MuseoModerno, Schoolbell } from 'next/font/google'
 
 const andika = Andika({
-  weight: '400',
-  variable: '--font-andika',
   subsets: ['latin'],
+  variable: '--font-andika',
+  weight: '400'
 });
 
 const museoModerno = MuseoModerno({
-  weight: '400',
-  variable: '--font-museo-moderno',
   subsets: ['latin'],
+  variable: '--font-museo-moderno',
+  weight: '400'
 });
 
 const mPlus1Code = M_PLUS_1_Code({
-  weight: '400',
+  subsets: ['latin'],
   variable: '--font-m-plus-1-code',
-  subsets: ['latin']
+  weight: '400'
 });
 
 const schoolbell = Schoolbell({
-  weight: '400',
+  subsets: ['latin'],
   variable: '--font-schoolbell',
-  subsets: ['latin']
+  weight: '400'
 });
 
 

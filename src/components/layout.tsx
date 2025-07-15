@@ -11,15 +11,13 @@ type LayoutProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>> & {
   readonly navbar?: boolean
 };
 
-const Layout = ({ className, footer, navbar, children, ...props }: LayoutProps): ReactNode => {
-  return (
-    <div className={clsx(styles.layout_full, className)} {...props}>
-      {navbar !== false ? <Navbar /> : null }
-      {children}
-      {footer !== false ? <Footer /> : null }
-    </div>
-  )
-}
+const Layout = ({ className, footer, navbar, children, ...props }: LayoutProps): ReactNode => (
+  <div className={clsx(styles.layout_full, className)} {...props}>
+    {navbar !== false ? <Navbar /> : null }
+    {children}
+    {footer !== false ? <Footer /> : null }
+  </div>
+);
 
 export { Layout };
 export type { LayoutProps };

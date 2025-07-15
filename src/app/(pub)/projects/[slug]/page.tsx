@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, notFound } from 'next/navigation'
+import { notFound, useParams } from 'next/navigation'
 
 import { Main } from '@/components/main';
 

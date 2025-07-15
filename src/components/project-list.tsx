@@ -10,16 +10,12 @@ type ProjectListProps = ComponentProps<'ul'> & {
   readonly data: Project[]
 };
 
-const ProjectList = ({ className, data, ...props }: ProjectListProps) => {
-  return (
-    <ul {...props} className={clsx(styles.projects, className)}>
-      { data.map((project) => {
-        return (
-          <li key={project.name}><ProjectCard data={project} /></li>
-        )
-      })}
-    </ul>
-  )
-}
+const ProjectList = ({ className, data, ...props }: ProjectListProps) => (
+  <ul {...props} className={clsx(styles.projects, className)}>
+    { data.map((project) => (
+        <li key={project.name}><ProjectCard data={project} /></li>
+      ))}
+  </ul>
+)
 
 export { ProjectList }
