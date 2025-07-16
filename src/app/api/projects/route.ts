@@ -11,7 +11,7 @@ const  GET = async (request: Request) => {
 
 const POST = async (request: Request) => {
   const body = await request.json();
-  const result = projectSchema.omit({ thumbnail: true, images: true }).safeParse(body);
+  const result = projectSchema.partial({ images: true }).safeParse(body);
 
   if (!result.success) {
     return new Response(result.error.message, { status: 400 });

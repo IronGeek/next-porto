@@ -19,7 +19,7 @@ const submitForm = async (state: { slug: string | null }, formData: FormData) =>
     role: formData.get('role').toString(),
     summary: formData.get('summary').toString(),
     technologies: formData.get('technologies').toString().split(',').map((s) => s.trim()),
-    thumbnail: '/projects/canvas-flow/thumbnail.png'
+    thumbnail: '/projects/default/thumbnail.png'
   };
 
   const { error, success, data: project } = await projectSchema.partial().safeParseAsync(updates);
