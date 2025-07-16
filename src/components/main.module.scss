@@ -18,9 +18,19 @@
     }
   }
 
+  &.fullscreen {
+    min-height: 100vh;
+  }
+
   &:not(.fullscreen) {
     min-height: calc(100% - var(--app-navbar-height) - var(--app-footer-height));
   }
+}
+
+.main_toolbar {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto auto;
 }
 
 .main_title {
@@ -29,4 +39,11 @@
   margin-bottom: 2rem;
 
   color: #903;
+}
+
+.main_actions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: .5rem;
 }

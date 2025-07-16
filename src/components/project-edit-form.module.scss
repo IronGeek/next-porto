@@ -1,0 +1,59 @@
+.form {
+  display: grid;
+
+  background-color: #fefefe;
+  padding: 2rem;
+  border: 1px dotted #ddd;
+  border-radius: .5rem;
+  box-shadow: 0 .25rem .375rem rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+
+.form_group {
+  margin-bottom: 1rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+
+    font-weight: bold;
+    color: #222;
+
+    margin-bottom: .5rem;
+  }
+
+  input, textarea {
+    font-family: var(--font-schoolbell);
+    border: 1px dashed #ddd;
+    border-radius: .5rem;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="file"],
+  textarea {
+    width: 100%;
+    padding: .5rem 1rem;
+
+    font-size: 1.15em;
+
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fcfcfc;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="file"]:focus,
+  textarea:focus {
+    border-color: #903;
+    box-shadow: 0 0 0 3px rgba(153, 0, 51, 0.2);
+    outline: none;
+  }
+}

@@ -1,24 +1,34 @@
-.navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.navigation, .navigation_skeleton {
+  display: grid;
+  gap: 1rem;
 
   font-size: 1.1em;
-  margin-bottom: 3rem;
+  margin-top: 5rem;
+}
 
+.navigation {
   a:hover {
-    text-decoration: underline;
-    text-decoration-color: #903;
-    text-decoration-style: wavy;
+    background-color: rgba(34, 34, 34, 0.082);
+  }
+}
+
+.navigation_skeleton {
+  .link {
+    color: var(--color-gray-200);
   }
 }
 
 .link {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 1rem;
+
+  border: 1px solid #ddd;
+  border-radius: .25rem;
+  padding: .5rem 1rem;
 
   &> svg {
     margin-bottom: -0.125em;
   }
 }
+

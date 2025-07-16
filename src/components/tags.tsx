@@ -20,4 +20,21 @@ const Tags = ({ tags, vertical }: TagsProps) => {
   );
 };
 
-export { Tags }
+interface TagsSkeletonProps {
+  readonly count?: number
+  readonly vertical?: boolean
+}
+const TagsSkeleton= ({ count, vertical }: TagsSkeletonProps) => {
+  const items = [...Array(count).keys()];
+
+  return (
+    <ul className={clsx(styles.tags_skeleton, vertical ? styles.tags_vertical : undefined)}>
+      { items.map((v, i) => (
+          <li key={i}><div className="skeleton-line h-2.5 w-20"></div></li>
+        ))
+      }
+    </ul>
+  );
+};
+
+export { Tags, TagsSkeleton }

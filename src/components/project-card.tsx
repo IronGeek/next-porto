@@ -20,11 +20,26 @@ const ProjectCard = ({ className, data, ...props }: ProjectCardProps) => {
       <div className={styles.project_body}>
         <Link href={href}>
           <div className={styles.project_name}>{data.name}</div>
-          <div className={styles.project_title}>{data.title}</div>
+          <div className={styles.project_description}>{data.description}</div>
         </Link>
       </div>
     </div>
   )
 }
 
-export { ProjectCard }
+const ProjectCardSkeleton = ({ className, ...props }: ComponentProps<'div'>) => {
+  return (
+    <div {...props} className={clsx(styles.project_skeleton, className)}>
+      <div className={clsx(styles.project_image, "skeleton-image w-[300px] h-[300px]")} />
+      <div className={styles.project_body}>
+        <div className="skeleton-line h-8 w-full mb-3"></div>
+        <div className="skeleton-line h-2.5 w-9/10 mb-2"></div>
+        <div className="skeleton-line h-2.5 w-8/10 mb-2"></div>
+        <div className="skeleton-line h-2.5 w-9/10 mb-2"></div>
+        <div className="skeleton-line h-2.5 w-7/10 mb-2"></div>
+      </div>
+    </div>
+  )
+}
+
+export { ProjectCard, ProjectCardSkeleton }

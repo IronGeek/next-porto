@@ -4,10 +4,10 @@ import styles from './project-list.module.scss';
 
 import type { ComponentProps } from 'react';
 import type { Project } from '@/lib/data';
-import { ProjectCard } from './project-card';
+import { ProjectCard, ProjectCardSkeleton } from './project-card';
 
 type ProjectListProps = ComponentProps<'ul'> & {
-  readonly data: Project[]
+  readonly data: readonly Project[]
 };
 
 const ProjectList = ({ className, data, ...props }: ProjectListProps) => (
@@ -18,4 +18,15 @@ const ProjectList = ({ className, data, ...props }: ProjectListProps) => (
   </ul>
 )
 
-export { ProjectList }
+const ProjectListSkeleton = ({ className, ...props }: ComponentProps<'ul'>) => (
+  <ul {...props} className={clsx(styles.projects,  className)}>
+    <li><ProjectCardSkeleton /></li>
+    <li><ProjectCardSkeleton /></li>
+    <li><ProjectCardSkeleton /></li>
+    <li><ProjectCardSkeleton /></li>
+    <li><ProjectCardSkeleton /></li>
+    <li><ProjectCardSkeleton /></li>
+  </ul>
+)
+
+export { ProjectList, ProjectListSkeleton }
