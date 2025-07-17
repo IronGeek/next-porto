@@ -38,7 +38,7 @@ const ProjectPage = () => {
   const handleDelete = (e) => {
     e.preventDefault();
 
-    deleteProject(slug as string).then(() => { mutate(revalidator(/^\/projects/)) });
+    deleteProject(slug as string).then(() => mutate(revalidator(/^\/projects/)));
   };
 
   if (error instanceof FetchError) {

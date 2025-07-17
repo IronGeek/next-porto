@@ -77,7 +77,7 @@ const ProjectForm = ({ data, ...props }: FormProps<Project>) => {
               preview
             />
           </Form.Group>
-          <Form.Group>
+          <Form.Group className="hidden">
             <Form.FileInput
               name="images"
               label="Images"

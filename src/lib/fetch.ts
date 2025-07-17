@@ -68,8 +68,6 @@ type RequestContext<T> = {
 }
 
 const revalidator = (test: RegExp | string) => (arg: string | [string, Record<string, string>]) => {
-  console.log(arg);
-
   const key = Array.isArray(arg) ? arg[0] : arg;
   return test instanceof RegExp ? test.test(key) : key.startsWith('/projects');
 };

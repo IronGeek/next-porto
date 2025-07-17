@@ -7,35 +7,50 @@ import { notFound, redirect, useParams } from 'next/navigation';
 
 import { Main } from '@/components/main';
 import { Error } from '@/components/error';
-import { ProjectForm } from '@/components/project-edit-form';
+import { ProjectForm } from '@/components/project-form';
 import { SaveIcon, CancelIcon } from '@/ui/icons';
 import { fetcher, FetchError, revalidator } from '@/lib/fetch';
 import { getProjectsEndpoint, Project, projectSchema } from '@/lib/projects';
 
-const submitForm = async (state: { slug: string, submitted: boolean}, formData: FormData) => {
+const submitForm = async (state: { slug: string, submitted: boolean}, context: FormData) => {
   const entity = {
-    name: formData.get('name').toString(),
-    slug: formData.get('slug').toString(),
-    description: formData.get('description').toString(),
-    role: formData.get('role').toString(),
-    summary: formData.get('summary').toString(),
-    technologies: formData.get('technologies').toString().split(',').map((s) => s.trim()),
+    name: context.get('name').toString(),
+    slug: context.get('slug').toString(),
+    description: context.get('description').toString(),
+    role: context.get('role').toString(),
+    summary: context.get('summary').toString(),
+    technologies: context.get('technologies').toString().split(',').map((s) => s.trim()),
   };
 
-  const { error, success, data: project } = await projectSchema.partial().safeParseAsync(entity);
-
-  if (success) {
-    try {
-      await fetch(getProjectsEndpoint(state.slug), { method: 'POST', body: JSON.stringify(project) });
-
-      mutate(revalidator(/^\/projects/u));
-
-      return { slug: entity.slug, submitted: true }
-    } catch (err) {
-      console.error('Form submission failed:', err);
-    }
-  } else {
+  const { error, data } = await projectSchema.partial().safeParseAsync(entity);
+  if (error) {
     console.error('Form submission failed:', error);
+
+    return state;
+  }
+
+  const formData = new FormData();
+  formData.append('data', JSON.stringify(data));
+
+  const thumbnail = context.get('thumbnail');
+  if (thumbnail instanceof File && thumbnail.size > 0) {
+    console.log('thumbnail', thumbnail);
+    formData.append('thumbnail', thumbnail);
+  }
+
+  const images = context.get('images');
+  if (images instanceof File && images.size > 0) {
+    console.log('images', images);
+  }
+
+  try {
+    await fetch(getProjectsEndpoint(state.slug), { method: 'POST', body: formData });
+
+    await mutate(revalidator(/^\/projects/u));
+
+    return { slug: data.slug, submitted: true }
+  } catch (err) {
+    console.error('Form submission failed:', err);
   }
 
   return state;

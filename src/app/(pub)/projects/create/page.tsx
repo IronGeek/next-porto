@@ -9,10 +9,10 @@ import { redirect } from 'next/navigation';
 import { Main } from '@/components/main';
 import { SaveIcon, CancelIcon } from '@/ui/icons';
 import { getProjectsEndpoint, projectSchema } from '@/lib/projects';
-import { ProjectForm } from '@/components/project-edit-form';
+import { ProjectForm } from '@/components/project-form';
 import { revalidator } from '@/lib/fetch';
 
-const submitForm = async (state: { slug: string | null }, formData: FormData) => {
+const submitForm = async (state: { slug: string | null, submitted: boolean }, formData: FormData) => {
   const entity = {
     id: formData.get('id').toString(),
     name: formData.get('name').toString(),
@@ -30,9 +30,9 @@ const submitForm = async (state: { slug: string | null }, formData: FormData) =>
     try {
       await fetch(getProjectsEndpoint(), { method: 'POST', body: JSON.stringify(project) });
 
-      mutate(revalidator(/^\/projects/u));
+      await mutate(revalidator(/^\/projects/u));
 
-      return { slug: project.slug }
+      return { slug: project.slug, submitted: true }
     } catch (err) {
       console.error('Form submission failed:', err);
     }
@@ -44,10 +44,10 @@ const submitForm = async (state: { slug: string | null }, formData: FormData) =>
 }
 
 const ProjectCreatePage = () => {
-  const [ data, formAction, isPending] = useActionState(submitForm, { slug: null });
+  const [ data, formAction, isPending] = useActionState(submitForm, { slug: null, submitted: false });
 
   useEffect(() => {
-    if (data && data.slug) { redirect(`/projects/${data.slug}`) }
+    if (data && data.submitted && data.slug) { redirect(`/projects/${data.slug}`) }
   }, [data?.slug]);
 
   return (

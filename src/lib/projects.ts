@@ -85,5 +85,8 @@ const updateProjectBySlug = async (slug: string, updates: Partial<Project>): Pro
   return updated;
 }
 
-export { projectSchema, getProjectsEndpoint, createProject, getProjects, getProjectBySlug, deleteProjectBySlug, updateProjectBySlug };
+export { projectSchema,
+  getProjectsEndpoint, createProject, getProjects, getProjectBySlug, deleteProjectBySlug, updateProjectBySlug
+};
+
 export type { Project, ProjectWithMeta }
