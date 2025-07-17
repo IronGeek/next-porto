@@ -30,6 +30,7 @@ button, a[href] {
   &.button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: nowrap;
     gap: .5rem;
 
