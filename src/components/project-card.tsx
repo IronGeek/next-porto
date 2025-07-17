@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styles from './project-card.module.scss';
 
 import type { ComponentProps } from 'react';
-import type { Project } from '@/lib/data';
+import type { Project } from '@/lib/projects';
 import Link from 'next/link';
 
 type ProjectCardProps = ComponentProps<'div'> & {

@@ -1,28 +1,34 @@
-import { createProject, getProjects, projectSchema } from '@/lib/data'
+import { NotFoundResponse } from '@/lib/fetch';
+import { createProject, getProjects, projectSchema } from '@/lib/projects'
 
-const  GET = async (request: Request) => {
+import { type NextRequest } from 'next/server';
+
+const  GET = async (_request: NextRequest) => {
   const projects = await getProjects();
 
-  return new Response(JSON.stringify(projects), {
+  return Response.json(projects, {
     status: 200,
     headers: { 'Content-Type': 'application/json' }
   });
 }
 
-const POST = async (request: Request) => {
+const POST = async (request: NextRequest) => {
   const body = await request.json();
   const result = projectSchema.partial({ images: true }).safeParse(body);
 
   if (!result.success) {
-    return new Response(result.error.message, { status: 400 });
+    return Response.json(result.error.message, { status: 400 });
   }
 
   const created = await createProject(result.data);
-  if (!created) { return new Response(null, { status: 404 }) }
+  if (!created) { return NotFoundResponse }
 
-  return new Response(JSON.stringify(created), {
+  return Response.json(created, {
     status: 201,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      'Location': new URL(`/projects/${created.slug}`, request.url).toString()
+    }
   });
 }
 

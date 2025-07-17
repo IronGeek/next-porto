@@ -5,11 +5,12 @@ import Link from 'next/link';
 
 import { Main } from '@/components/main';
 import { ProjectList, ProjectListSkeleton } from '@/components/project-list';
-import { fetcher, getApiURL, Project } from '@/lib/data';
+import { getProjectsEndpoint, Project } from '@/lib/projects';
 import { PlusIcon } from '@/ui/icons';
+import { fetcher } from '@/lib/fetch';
 
 const ProjectsPage = () => {
-  const { data, error, isLoading } = useSWR<readonly Project[]>(getApiURL(), fetcher('json'));
+  const { data, error, isLoading } = useSWR(getProjectsEndpoint(), fetcher.json<readonly Project[]>);
 
   return (
     <Main

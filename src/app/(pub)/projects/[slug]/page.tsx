@@ -1,21 +1,22 @@
 "use client";
 
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import Link from 'next/link';
 import { notFound, redirect, useParams } from 'next/navigation'
 
 import { Main } from '@/components/main';
-
+import { Error } from '@/components/error';
 import { ProjectDetail, ProjectDetailSkeleton } from '@/components/project-detail';
 import { ProjectNavigation, ProjectNavigationSkeleton } from '@/components/project-navigation';
-
-import { fetcher, getApiURL } from '@/lib/data';
-import type { ProjectWithMeta } from '@/lib/data';
 import { CancelIcon, DeleteIcon, EditIcon } from '@/ui/icons';
+import { fetcher, FetchError, revalidator } from '@/lib/fetch';
+import { getProjectsEndpoint } from '@/lib/projects';
+
+import type { ProjectWithMeta } from '@/lib/projects';
 
 const deleteProject = async (slug: string) => {
-  const apiURL = getApiURL(slug);
-  const response = await fetch(apiURL, { method: 'DELETE' })
+  const apiURL = getProjectsEndpoint(slug);
+  const response = await fetch(apiURL, { method: 'DELETE' });
 
   if (response.ok) {
     // TODO: raise notification project is deleted
@@ -31,14 +32,18 @@ const deleteProject = async (slug: string) => {
 
 const ProjectPage = () => {
   const { slug } = useParams()
-  const apiURL = getApiURL(slug as string);
-  const { data, error, isLoading } = useSWR<ProjectWithMeta>(apiURL, fetcher('json'));
+  const apiURL = getProjectsEndpoint(slug);
+  const { data, error, isLoading } = useSWR([apiURL, { meta: true }], fetcher.json<ProjectWithMeta>);
 
   const handleDelete = (e) => {
     e.preventDefault();
 
-    deleteProject(slug as string);
+    deleteProject(slug as string).then(() => { mutate(revalidator(/^\/projects/)) });
   };
+
+  if (error instanceof FetchError) {
+    if (error.code === 404) { return notFound() }
+  }
 
   return (
     <Main
@@ -52,7 +57,7 @@ const ProjectPage = () => {
         : null
       )}>
       { error
-        ? <div>Failed to load project data: {error.toString()}</div>
+        ? <Error error={error} />
        : isLoading
           ? <div>
               <ProjectDetailSkeleton />

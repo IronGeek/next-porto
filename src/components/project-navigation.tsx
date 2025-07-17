@@ -6,7 +6,7 @@ import { NextIcon, PrevIcon } from '@/ui/icons';
 import styles from './project-navigation.module.scss';
 
 import type { ComponentProps } from 'react';
-import type { ProjectWithMeta } from '@/lib/data';
+import type { ProjectWithMeta } from '@/lib/projects';
 
 type ProjectNavigationProps = ComponentProps<'div'> & {
   readonly data: ProjectWithMeta | undefined

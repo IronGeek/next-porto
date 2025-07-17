@@ -1,18 +1,20 @@
 'use client';
 
+import { useActionState, useEffect } from 'react';
+import { mutate } from 'swr';
 import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
-import { Main } from '@/components/main';
-
-import { SaveIcon, CancelIcon } from '@/ui/icons';
-import { ProjectCreateForm } from '@/components/project-create-form';
-import { getApiURL, projectSchema } from '@/lib/data';
-import { useActionState, useEffect, useRef } from 'react';
 import { redirect } from 'next/navigation';
 
+import { Main } from '@/components/main';
+import { SaveIcon, CancelIcon } from '@/ui/icons';
+import { getProjectsEndpoint, projectSchema } from '@/lib/projects';
+import { ProjectForm } from '@/components/project-edit-form';
+import { revalidator } from '@/lib/fetch';
+
 const submitForm = async (state: { slug: string | null }, formData: FormData) => {
-  const updates = {
-    id: uuidv4(),
+  const entity = {
+    id: formData.get('id').toString(),
     name: formData.get('name').toString(),
     slug: formData.get('slug').toString(),
     description: formData.get('description').toString(),
@@ -22,15 +24,16 @@ const submitForm = async (state: { slug: string | null }, formData: FormData) =>
     thumbnail: '/projects/default/thumbnail.png'
   };
 
-  const { error, success, data: project } = await projectSchema.partial().safeParseAsync(updates);
+  const { error, success, data: project } = await projectSchema.partial().safeParseAsync(entity);
 
   if (success) {
     try {
-      await fetch(getApiURL(), { method: 'POST', body: JSON.stringify(project) });
+      await fetch(getProjectsEndpoint(), { method: 'POST', body: JSON.stringify(project) });
+
+      mutate(revalidator(/^\/projects/u));
 
       return { slug: project.slug }
     } catch (err) {
-      // Handle error
       console.error('Form submission failed:', err);
     }
   } else {
@@ -41,7 +44,6 @@ const submitForm = async (state: { slug: string | null }, formData: FormData) =>
 }
 
 const ProjectCreatePage = () => {
-  const createForm = useRef<HTMLFormElement>(null);
   const [ data, formAction, isPending] = useActionState(submitForm, { slug: null });
 
   useEffect(() => {
@@ -49,15 +51,22 @@ const ProjectCreatePage = () => {
   }, [data?.slug]);
 
   return (
-    <Main
-      title="New Project"
-      actions={(
-        <div>
-          <button className="button primary"  onClick={() => { createForm.current?.requestSubmit() }}><SaveIcon size="1.1em" /> Save</button>
-          <Link href="/projects" className="button secondary"><CancelIcon size="1.1em" /> Back</Link>
-        </div>
-      )}>
-      <ProjectCreateForm ref={createForm} action={formAction} disabled={isPending} />
+    <Main>
+      <ProjectForm
+        title="Create Project"
+        action={formAction}
+        actions={(
+          data
+            ? <>
+                <button type="submit" className="button primary"><SaveIcon size="1.1em" /> Save</button>
+                <Link href="/projects" className="button secondary"><CancelIcon size="1.1em" /> Back</Link>
+              </>
+            : null
+        )}
+        data={{ id: uuidv4() }}
+        pending={isPending}
+        disabled={isPending}
+        bordered  />
     </Main>
   )
 }

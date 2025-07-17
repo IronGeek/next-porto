@@ -12,9 +12,10 @@ import XIcon from '@/ui/icons/x.svg'
 import SaveIcon from '@/ui/icons/save.svg'
 import DeleteIcon from '@/ui/icons/delete.svg'
 import CancelIcon from '@/ui/icons/cancel.svg'
+import LockIcon from '@/ui/icons/lock.svg'
 
 export {
   ContactIcon, DownloadIcon, GitHubIcon, NextIcon, PrevIcon,
   ProfileIcon,  RequiredIcon, SendEmailIcon, PlusIcon, EditIcon,
-  XIcon, SaveIcon, DeleteIcon, CancelIcon
+  XIcon, SaveIcon, DeleteIcon, CancelIcon, LockIcon
 };

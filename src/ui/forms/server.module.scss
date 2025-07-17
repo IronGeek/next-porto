@@ -1,0 +1,123 @@
+.form {
+  display: grid;
+  padding: 2rem;
+  width: 100%;
+
+  &:global(.form-bordered) {
+    border: 1px dashed #ddd;
+    border-radius: .5rem;
+  }
+
+  :global(.form-group) {
+    margin-bottom: 1rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+
+      font-weight: bold;
+      color: #222;
+
+      margin-bottom: .5rem;
+
+      svg {
+        margin-top: .375rem;
+      }
+    }
+
+    input:not([type="file"]), textarea {
+      font-family: var(--font-schoolbell);
+      border: 1px dashed #ddd;
+      border-radius: .5rem;
+
+      width: 100%;
+      padding: .5rem 1rem;
+
+      font-size: 1.15em;
+
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: #fcfcfc;
+
+      &:not(:last-child) {
+        margin-bottom: .5rem;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 8rem;
+    }
+
+    input[type="file"] {
+      font-family: var(--font-schoolbell);
+      border: 1px dashed #ddd;
+      border-radius: .5rem;
+
+      width: 100%;
+
+      font-size: 1.15em;
+
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: #fcfcfc;
+      color: #a9a9a9;
+    }
+
+    input[type="file"]::file-selector-button {
+      border: 1px solid #22222214;
+
+      padding: .5rem 1rem .375rem 1rem;
+      margin: -1px;
+      margin-right: 1rem;
+      color: #222;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #903;
+      box-shadow: 0 0 0 3px rgba(153, 0, 51, 0.2);
+      outline: none;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #a9a9a9;
+    }
+  }
+
+  :global(.form-file-preview) {
+    border: 1px dashed #ddd;
+    border-radius: .5rem;
+  }
+
+  :global(.form-input-indicator) {
+    color: #903;
+    font-size: .625em
+  }
+}
+
+.form_header {
+  margin: -2rem -2rem 2rem -2rem;
+  padding: 1rem 2rem;
+
+  &:empty {
+    display: none;
+  }
+
+  :global(.form-title) {
+    font-size: 1.75rem;
+  }
+
+  :global(.form-description) {
+    font-size: 1.125rem;
+    color: #666;
+  }
+
+  :global(.form-actions) {
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+.form_grid {
+  display: grid;
+}

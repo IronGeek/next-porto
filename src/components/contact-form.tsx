@@ -1,105 +1,60 @@
 'use client';
 
-import { ComponentProps, isValidElement, ReactNode, useState } from 'react';
+import { useActionState } from 'react';
 
-import styles from './contact-form.module.scss';
-import clsx from 'clsx';
-import { RequiredIcon, SendEmailIcon } from '@/ui/icons';
+import { SendEmailIcon } from '@/ui/icons';
+import { Form, FormGroup, FormProps } from '@/ui/forms';
 
-type ContactFormProps = Omit<ComponentProps<'div'>, 'title'> & {
-  readonly title?: ReactNode
-  readonly description?: ReactNode
-}
+const submitForm = (_, formData: FormData) => {
+  console.log(Object.fromEntries(formData));
 
-const ContactForm = ({ className, title, description, ...props }: ContactFormProps) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    message: '',
-    name: '',
-    subject: ''
-  });
+  alert('Message sent successfully! (Don\'t worry this is a mock submission)');
+};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData(prevState => ({ ...prevState, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // eslint-disable-next-line no-alert
-    alert('Message sent successfully! (Don\'t worry this is a mock submission)');
-
-    setFormData({
-      email: '',
-      message: '',
-      name: '',
-      subject: ''
-    });
-  };
+const ContactForm = ({ className, ...props }: FormProps) => {
+  const [_, action, pending] = useActionState(submitForm, null);
 
   return (
-    <div {...props} className={clsx(styles.contactForm, className)}>
-      { isValidElement(title)
-        ? title
-        : <h2 className={styles.contactForm_title}>{title || 'Get in Touch'}</h2> }
-      { isValidElement(description)
-        ? description
-        : <div className={styles.contactForm_desc}>{ description || 'Have a question or want to work together? Send me a message!' } </div> }
-      <form onSubmit={handleSubmit}>
-        <div className={styles.contactFormGroup}>
-          <label htmlFor="name">Your Name <RequiredIcon color="#903" size=".5em" /></label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="John Doe"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.contactFormGroup}>
-          <label htmlFor="email">Your Email <RequiredIcon color="#903" size=".5em" /></label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="john.doe@example.com"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.contactFormGroup}>
-          <label htmlFor="subject">Subject <RequiredIcon color="#903" size=".5em" /></label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            placeholder="Project Inquiry"
-            value={formData.subject}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.contactFormGroup}>
-          <label htmlFor="message">Your Message <RequiredIcon color="#903" size=".5em" /></label>
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Hi Justin, I'd like to discuss a potential project..."
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <div className={clsx(styles.contactFormGroup, "text-center")}>
-          <button type="submit" className="button primary"><SendEmailIcon /> Send Message</button>
-        </div>
-      </form>
-    </div>
+    <Form {...props} action={action} pending={pending}>
+      <Form.Group>
+        <Form.TextInput
+          type="text"
+          name="name"
+          label="Your Name"
+          placeholder="John Doe"
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.TextInput
+          type="email"
+          label="Your Email"
+          name="email"
+          placeholder="john.doe@example.com"
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.TextInput
+          type="text"
+          label="Subject"
+          name="subject"
+          placeholder="Project Inquiry"
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.TextArea
+          label="Message"
+          name="message"
+          placeholder="Hi Justin, I'd like to discuss a potential project..."
+          required
+        />
+      </Form.Group>
+      <FormGroup className="text-center">
+        <button type="submit" className="button primary"><SendEmailIcon /> Send Message</button>
+      </FormGroup>
+    </Form>
   );
 };
 

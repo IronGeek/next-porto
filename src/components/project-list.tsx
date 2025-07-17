@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './project-list.module.scss';
 
 import type { ComponentProps } from 'react';
-import type { Project } from '@/lib/data';
+import type { Project } from '@/lib/projects';
 import { ProjectCard, ProjectCardSkeleton } from './project-card';
 
 type ProjectListProps = ComponentProps<'ul'> & {

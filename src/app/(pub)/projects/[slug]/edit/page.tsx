@@ -1,17 +1,19 @@
 'use client';
 
-import useSWRImmutable from 'swr/immutable';
+import { useActionState, useEffect } from 'react';
 import Link from 'next/link';
-import { Main } from '@/components/main';
-
-import { SaveIcon, CancelIcon } from '@/ui/icons';
-import { ProjectEditForm } from '@/components/project-edit-form';
+import useSWR, { mutate } from 'swr';
 import { notFound, redirect, useParams } from 'next/navigation';
-import { fetcher, getApiURL, Project, projectSchema } from '@/lib/data';
-import { useActionState, useEffect, useRef } from 'react';
 
-const submitForm = async (state: Project & { submitted: boolean }, formData: FormData) => {
-  const updates = {
+import { Main } from '@/components/main';
+import { Error } from '@/components/error';
+import { ProjectForm } from '@/components/project-edit-form';
+import { SaveIcon, CancelIcon } from '@/ui/icons';
+import { fetcher, FetchError, revalidator } from '@/lib/fetch';
+import { getProjectsEndpoint, Project, projectSchema } from '@/lib/projects';
+
+const submitForm = async (state: { slug: string, submitted: boolean}, formData: FormData) => {
+  const entity = {
     name: formData.get('name').toString(),
     slug: formData.get('slug').toString(),
     description: formData.get('description').toString(),
@@ -20,15 +22,16 @@ const submitForm = async (state: Project & { submitted: boolean }, formData: For
     technologies: formData.get('technologies').toString().split(',').map((s) => s.trim()),
   };
 
-  const { error, success, data: project } = await projectSchema.partial().safeParseAsync(updates);
+  const { error, success, data: project } = await projectSchema.partial().safeParseAsync(entity);
 
   if (success) {
     try {
-      await fetch(getApiURL(state.slug), { method: 'POST', body: JSON.stringify(project) });
+      await fetch(getProjectsEndpoint(state.slug), { method: 'POST', body: JSON.stringify(project) });
 
-      return { ...state, ...project, submitted: true }
+      mutate(revalidator(/^\/projects/u));
+
+      return { slug: entity.slug, submitted: true }
     } catch (err) {
-      // Handle error
       console.error('Form submission failed:', err);
     }
   } else {
@@ -40,34 +43,40 @@ const submitForm = async (state: Project & { submitted: boolean }, formData: For
 
 const ProjectEditPage = () => {
   const { slug } = useParams()
-
-  const editForm = useRef<HTMLFormElement>(null);
-  const apiURL = getApiURL(slug as string);
-  const { data: initial, error, isLoading } = useSWRImmutable<Project>(apiURL, fetcher('json'));
-  const [ data, formAction, isPending] = useActionState(submitForm, { ...initial, submitted: false });
+  const apiURL = getProjectsEndpoint(slug as string);
+  const { data, error, isLoading } = useSWR<Project>(apiURL, fetcher.json<Project>);
+  const [ state, formAction, isPending] = useActionState(submitForm, { slug, submitted: false });
 
   useEffect(() => {
-    if (data && data.submitted) { redirect(`/projects/${data.slug}`) }
-  }, [data?.submitted]);
+    if (state.submitted) {
+      redirect(`/projects/${state.slug}`);
+    }
+  }, [state.submitted]);
+
+  if (error instanceof FetchError) {
+    if (error.code === 404) { return notFound() }
+  }
 
   return (
-    <Main
-      title={data?.name}
-      actions={(
-        data
-          ? <div>
-              <button className="button primary" onClick={() => { editForm.current?.requestSubmit() }}><SaveIcon size="1.1em" /> Save</button>
-              <Link href={`/projects/${slug}`} className="button secondary"><CancelIcon size="1.1em" /> Back</Link>
-            </div>
-          : null
-      )}>
+    <Main>
       { error
-        ? <div>Failed to load project data: {error.toString()}</div>
-        : isLoading
-          ? <div>Loading project data...</div>
-          : data
-            ? <ProjectEditForm ref={editForm} action={formAction} data={data} disabled={isPending} />
-            : notFound()
+        ? <Error error={error} />
+        : <ProjectForm
+            title={`Edit Project (${data?.name})`}
+            action={formAction}
+            actions={(
+              data
+                ? <>
+                    <button type="submit" className="button primary"><SaveIcon size="1.1em" /> Save</button>
+                    <Link href={`/projects/${slug}`} className="button secondary"><CancelIcon size="1.1em" /> Back</Link>
+                  </>
+                : null
+            )}
+            data={data}
+            loading={isLoading}
+            pending={isPending}
+            disabled={isPending}
+            bordered />
       }
     </Main>
   )

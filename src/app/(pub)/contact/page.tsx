@@ -17,7 +17,11 @@ const ContactPage = () => (
         </div>
         <ContactList />
       </div>
-      <ContactForm className="min-w-xs md:-mt-26" />
+      <ContactForm
+        className="min-w-xs md:-mt-26"
+        title="Get in Touch"
+        description="Have a question or want to work together? Send me a message!"
+        bordered />
     </div>
   </Main>
 );
