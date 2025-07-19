@@ -41,6 +41,10 @@ const initialize = (path: string): Error => {
       ON "projects" ("slug");
     `);
     db.run(`
+      CREATE INDEX IF NOT EXISTS "idx_projects_name"
+      ON "projects" ("name" ASC);
+    `);
+    db.run(`
       CREATE VIEW "projects_slug" AS
       SELECT
 		    LAG(slug, 1, NULL) OVER (ORDER BY ROWID) AS prev,

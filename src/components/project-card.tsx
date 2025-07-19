@@ -11,10 +11,11 @@ import styles from './project-card.module.scss';
 
 type ProjectCardProps = ComponentProps<'div'> & {
   readonly data: Project
+  readonly urlPrefix?: string
 };
 
-const ProjectCard = ({ className, data, ...props }: ProjectCardProps) => {
-  const href = `/projects/${data.slug}`;
+const ProjectCard = ({ className, data, urlPrefix = '/projects/', ...props }: ProjectCardProps) => {
+  const href = `${urlPrefix}${data.slug}`;
 
   return (
     <div {...props} className={clsx(styles.project, className)}>

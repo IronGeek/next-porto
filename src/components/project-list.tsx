@@ -9,12 +9,13 @@ import type { Project } from '@/models/projects/types';
 
 type ProjectListProps = ComponentProps<'ul'> & {
   readonly data: readonly Project[]
+  readonly urlPrefix?: string
 };
 
-const ProjectList = ({ className, data, ...props }: ProjectListProps) => (
+const ProjectList = ({ className, data, urlPrefix, ...props }: ProjectListProps) => (
   <ul {...props} className={clsx(styles.projects, className)}>
     { data.map((project) => (
-        <li key={project.name}><ProjectCard data={project} /></li>
+        <li key={project.name}><ProjectCard data={project} urlPrefix={urlPrefix} /></li>
       ))}
   </ul>
 )

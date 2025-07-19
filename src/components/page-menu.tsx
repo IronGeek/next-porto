@@ -32,7 +32,10 @@ const PageMenu = ({ className, ...props }: PageMenuProps) => {
         <Link title="Profile" className={linkClass('/profile')} href="/profile">Profile</Link>
       </li>
       <li className={styles.menu_item}>
-        <Link title="Projects" className={linkClass('/projects', true)} href="/projects">Projects</Link>
+        <Link title="Projects SQLite" className={linkClass('/projects', true)} href="/projects">Projects (SQLite)</Link>
+      </li>
+      <li className={styles.menu_item}>
+        <Link title="Projects Postgres" className={linkClass('/projects-pg', true)} href="/projects-pg">Projects (Postgres)</Link>
       </li>
       <li className={styles.menu_item}>
         <Link title="Contact" className={linkClass('/contact')} href="/contact">Contact</Link>
