@@ -13,3 +13,14 @@
 
 3. All changes and new entries added will new survive `next` server restart, including all thumbnails uploaded.
  
+### Postgres storage
+
+1. The postgres storage is used in the `/projects-pg/**/*` url:
+
+   To set the database connection string in the `POSTGRES_DB_URL` environment variable in the `.env`
+   
+2. Thumbnails are uploaded and permanently stored in the `/public` directory. Make sure have enough permission write to this directory.
+
+3. All changes and new entries added will new survive `next` server restart, including all thumbnails uploaded.
+
+4. Thumbnails are shared between `/projects/**/*` and `/projects-pg/**/*`
