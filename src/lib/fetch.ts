@@ -1,4 +1,4 @@
-import type { Fetcher, Arguments } from 'swr';
+import type { Fetcher } from 'swr';
 
 class FetchError extends Error {
   #code: number
@@ -27,6 +27,11 @@ const fetchStrategy = Object.freeze({
     }
   }
 });
+
+const revalidator = (test: RegExp | string) => (arg: string | [string, Record<string, string>]) => {
+  const key = Array.isArray(arg) ? arg[0] : arg;
+  return test instanceof RegExp ? test.test(key) : key.startsWith(test);
+};
 
 const createFetcher = <T>(type: 'json' | 'blob' | 'text'): Fetcher<T, string> => {
   return async <T>(arg: string | [string, Record<string, string>]) => {
@@ -61,16 +66,9 @@ const dispatcher = <T>(method: string) => {
   }
 };
 
-const NotFoundResponse = Response.json(null, { status: 404 })
+type RequestContext<T> = { params: Promise<T> }
 
-type RequestContext<T> = {
-  params: Promise<T>
-}
 
-const revalidator = (test: RegExp | string) => (arg: string | [string, Record<string, string>]) => {
-  const key = Array.isArray(arg) ? arg[0] : arg;
-  return test instanceof RegExp ? test.test(key) : key.startsWith('/projects');
-};
 
-export { FetchError, revalidator, fetchStrategy, fetcher, dispatcher, NotFoundResponse};
+export { FetchError, revalidator, fetchStrategy, fetcher, dispatcher};
 export type { RequestContext }

@@ -8,7 +8,8 @@ import { redirect } from 'next/navigation';
 
 import { Main } from '@/components/main';
 import { SaveIcon, CancelIcon } from '@/ui/icons';
-import { getProjectsEndpoint, projectSchema } from '@/lib/projects';
+import { getApiEndpoint } from '@/models/projects';
+import { ProjectSchema } from '@/models/projects/schema';
 import { ProjectForm } from '@/components/project-form';
 import { revalidator } from '@/lib/fetch';
 
@@ -21,18 +22,20 @@ const submitForm = async (state: { slug: string | null, submitted: boolean }, fo
     role: formData.get('role').toString(),
     summary: formData.get('summary').toString(),
     technologies: formData.get('technologies').toString().split(',').map((s) => s.trim()),
-    thumbnail: '/projects/default/thumbnail.png'
   };
 
-  const { error, success, data: project } = await projectSchema.partial().safeParseAsync(entity);
+  const { error, success, data: project } = await ProjectSchema.partial().safeParseAsync(entity);
 
   if (success) {
     try {
-      await fetch(getProjectsEndpoint(), { method: 'POST', body: JSON.stringify(project) });
+      const res = await fetch(getApiEndpoint(), { method: 'POST', body: JSON.stringify(project) });
+      if (res.ok) {
+        await mutate(revalidator(/^\/projects/u));
 
-      await mutate(revalidator(/^\/projects/u));
-
-      return { slug: project.slug, submitted: true }
+        return { slug: project.slug, submitted: true }
+      } else {
+        console.error('Form submission failed:', res.statusText);
+      }
     } catch (err) {
       console.error('Form submission failed:', err);
     }

@@ -1,38 +1,15 @@
 import clsx from 'clsx';
 import { createElement, isValidElement } from 'react';
-
-import { FormTextInput } from '@/ui/forms/server/text';
-import { FormTextArea } from '@/ui/forms/server/textarea';
-import { FormFileInput } from '@/ui/forms/server/file';
-import { FormImageInput } from '@/ui/forms/server/image';
-
 import type { ComponentProps, ReactNode } from 'react';
-import type { FormTextInputProps } from '@/ui/forms/server/text';
-import type { FormTextAreaProps } from '@/ui/forms/server/textarea';
-import type { FormFileInputProps } from '@/ui/forms/server/file';
-import type { FormImageInputProps } from '@/ui/forms/server/image';
 
-import styles from './server.module.scss';
+import { FormGrid } from '@/ui/forms/grid';
+import { FormGroup } from '@/ui/forms/group';
+import { FormTextInput } from '@/ui/forms/text-input';
+import { FormTextArea } from '@/ui/forms/textarea';
+import { FormFileInput } from '@/ui/forms/file-input';
+import { FormImageInput } from '@/ui/forms/image-input';
 
-type FormGridProps = ComponentProps<'div'>;
-
-
-const FormGrid = ({ children, className, ...props }: FormGridProps) => (
-  <div {...props} className={clsx(styles.form_grid, "form-grid", className)}>
-    {children}
-  </div>
-)
-
-type FormGroupProps = ComponentProps<'div'>;
-
-const FormGroup = ({ children, className, ...props }: FormGroupProps) => {
-  return (
-    <div className={clsx("form-group", className)}>
-      {children}
-    </div>
-  )
-}
-
+import styles from './form.module.scss';
 
 type FormProps<T = unknown> = Omit<ComponentProps<'form'>, 'title'> & {
   readonly loading?: boolean
@@ -91,12 +68,5 @@ Form.TextArea = FormTextArea;
 Form.FileInput = FormFileInput;
 Form.ImageInput = FormImageInput;
 
-export {
-  Form, FormGrid, FormGroup,
-  FormTextInput, FormTextArea, FormFileInput, FormImageInput
-}
-
-export type {
-  FormProps, FormGridProps, FormGroupProps,
-  FormTextInputProps, FormTextAreaProps, FormFileInputProps, FormImageInputProps
-}
+export { Form }
+export type { FormProps }

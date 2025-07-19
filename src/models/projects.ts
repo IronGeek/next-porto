@@ -1,17 +1,4 @@
-interface Project {
-  readonly id: string
-  readonly name: string
-  readonly slug?: string
-
-  readonly description: string
-  readonly summary: string
-
-  readonly role: string
-  readonly technologies: string[]
-
-  readonly images?: string[]
-  readonly thumbnail: string
-}
+import type { Project } from '@/models/projects/types';
 
 const projects: Project[] = [
   {
@@ -142,5 +129,19 @@ const projects: Project[] = [
   },
 ]
 
-export { projects }
-export type { Project }
+const getApiEndpoint = (slug?: string | string[]): string => {
+  const path = Array.isArray(slug) ? slug.join('/') : slug;
+
+  return path ? `/api/projects/${path}` : `/api/projects`;
+}
+
+const toCSV = (projects: readonly Project[]): string  => {
+  const csv = [];
+
+  csv.push(Object.keys(projects[0]).join(', '));
+  csv.push(...projects.map((item) => Object.values(item).map((s) => `"${s}"`).join(', ')));
+
+  return csv.join('\n');
+}
+
+export { projects, getApiEndpoint, toCSV };

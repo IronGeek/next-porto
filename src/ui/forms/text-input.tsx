@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { isValidElement } from 'react';
+import { isValidElement, useId } from 'react';
 
 import { LockIcon, RequiredIcon } from '@/ui/icons';
 
@@ -30,15 +30,17 @@ type FormTextInputProps = Omit<ComponentProps<'input'>, 'type'> & {
 }
 
 const FormTextInput = ({ className, label, type = 'text', ...props }: FormTextInputProps) => {
+  const id = useId();
+
   return (
     <>
       { isValidElement<HTMLLabelElement>(label)
         ? label
-        : <label htmlFor={props.name}><span>{label || props.name}</span>
+        : <label htmlFor={id}><span>{label || props.name}</span>
             { props.readOnly ? <LockIcon className="form-input-indicator" /> : null }
             { props.required ? <RequiredIcon className="form-input-indicator" /> : null }
           </label> }
-      <input {...props} type={type} className={clsx("form-input", className)} />
+      <input {...props} id={id} type={type} className={clsx("form-input", className)} />
     </>
   )
 }

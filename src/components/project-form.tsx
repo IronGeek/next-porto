@@ -1,6 +1,6 @@
 import { Form } from '@/ui/forms';
-import { Project } from '@/lib/projects';
 
+import type { Project } from '@/models/projects/types';
 import type { FormProps } from '@/ui/forms';
 
 const ProjectForm = ({ data, ...props }: FormProps<Project>) => {
@@ -64,7 +64,7 @@ const ProjectForm = ({ data, ...props }: FormProps<Project>) => {
               name="technologies"
               label="Technologies"
               placeholder="Technologies used (separate multiple technology with comma)"
-              defaultValue={data?.technologies?.join(', ')}
+              defaultValue={data?.technologies}
               required />
           </Form.Group>
         </div>

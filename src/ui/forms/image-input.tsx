@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { isValidElement } from 'react';
+import { isValidElement, useId } from 'react';
 
 import { FormImageClient } from '@/ui/forms/client/image';
 import { LockIcon, RequiredIcon } from '@/ui/icons';
@@ -12,20 +12,23 @@ type FormImageInputProps = Omit<ComponentProps<'input'>, 'type'> & {
 }
 
 const FormImageInput = ({ className, defaultValue, label, preview, ...props }: FormImageInputProps) => {
+  const id = useId();
+
   return (
     <>
       { isValidElement<HTMLLabelElement>(label)
         ? label
-        : <label htmlFor={props.name}><span>{label || props.name}</span>
+        : <label htmlFor={id}><span>{label || props.name}</span>
             { props.readOnly ? <LockIcon className="form-input-indicator" /> : null }
             { props.required ? <RequiredIcon className="form-input-indicator" /> : null }
           </label> }
       { preview
         ? <FormImageClient
             {...props}
+            id={id}
             className={className}
             defaultValue={typeof defaultValue === 'string' ? defaultValue : undefined} />
-        : <input {...props} type="file" className={clsx("form-input", className)} /> }
+        : <input {...props} id={id} type="file" className={clsx("form-input", className)} /> }
     </>
   )
 }

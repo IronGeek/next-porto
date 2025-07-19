@@ -1,12 +1,15 @@
 ## Notice for  Testing
 
-1. Since the app uses static array as backends storage, for consistent result, please use the production build to test CRUD functionality in `/projects/**/*`:
+### SQLite (libSQL) storage
 
-   ```sh
-   pnpm build && pnpm start
-   ```
+1. The static array storage for the `/projects/**/*` endpoints is now migrated to SQLite (libSQL):
 
-2. Thumbnails are uploaded and permanently stored in the `/public` directory. Make sure you enough permission write to this directory.
+   To set the database file location set the `SQLITE_DB_FILE` environment variable in the `.env`
+   By default `data/app.db` will be used when no value is specified for the `SQLITE_DB_FILE` variable.
 
-3. All changes and new entries added will be lost when the `next` server restarted, but thumbnails uploaded will remain in their directory until manually deleted.
+   The database initialized upon starting the `next` server taking advantage of Next.js `instrumentation.ts|js` mechanism
+
+2. Thumbnails are uploaded and permanently stored in the `/public` directory. Make sure have enough permission write to this directory.
+
+3. All changes and new entries added will new survive `next` server restart, including all thumbnails uploaded.
  

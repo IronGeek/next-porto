@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 
+import { ProjectCard, ProjectCardSkeleton } from '@/components/project-card';
+
 import styles from './project-list.module.scss';
 
 import type { ComponentProps } from 'react';
-import type { Project } from '@/lib/projects';
-import { ProjectCard, ProjectCardSkeleton } from './project-card';
+import type { Project } from '@/models/projects/types';
 
 type ProjectListProps = ComponentProps<'ul'> & {
   readonly data: readonly Project[]

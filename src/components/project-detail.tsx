@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Tags, TagsSkeleton } from '@/components/tags';
 
 import type { ComponentProps } from 'react';
-import type { Project } from '@/lib/projects';
+import type { Project } from '@/models/projects/types';
 
 import styles from './project-detail.module.scss';
 

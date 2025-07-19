@@ -1,11 +1,13 @@
-import { NotFoundResponse, RequestContext } from '@/lib/fetch';
-import { deleteProjectBySlug, getProjectBySlug, getProjects, Project, projectSchema, updateProjectBySlug } from '@/lib/projects'
 import { mkdir, writeFile } from 'fs/promises';
-
-import type { NextRequest } from 'next/server';
 import { dirname, extname, join, relative, resolve } from 'path';
 
-type Writeable<T> = { -readonly [P in keyof T]: T[P] };
+import { RequestContext } from '@/lib/fetch';
+import { deleteProjectBySlug, getProjectBySlug, updateProjectBySlug } from '@/services/projects'
+import { ProjectSchema } from '@/models/projects/schema';
+
+import type { NextRequest } from 'next/server';
+import type { Project } from '@/models/projects/types';
+import type { Writeable } from '@/models/types';
 
 const saveThumbnail = async (slug: string, thumbFile: File | null, cwd: string = process.cwd()): Promise<string | null> => {
   if (!thumbFile) { return null }
@@ -28,7 +30,7 @@ const  GET = async (request: NextRequest, { params }: RequestContext<{ slug: str
   const { slug } = await params;
   const project = await getProjectBySlug(slug, includeMeta);
 
-  if (!project) { return NotFoundResponse }
+  if (!project) { return Response.json(null, { status: 404 }) }
 
   return Response.json(project, {
     status: 200,
@@ -40,7 +42,7 @@ const  DELETE = async (request: NextRequest, { params }: RequestContext<{ slug: 
   const { slug } = await params;
   const deleted = await deleteProjectBySlug(slug);
 
-  if (!deleted) { return NotFoundResponse }
+  if (!deleted) { return Response.json(null, { status: 404 }) }
 
   return Response.json(deleted, {
     status: 200,
@@ -77,13 +79,13 @@ const POST = async (request: NextRequest, { params }: RequestContext<{ slug: str
 
   if (!data) { return Response.json({ error: 'invalid data' }, { status: 400 }) }
 
-  const result = projectSchema.partial().safeParse(data);
+  const result = ProjectSchema.partial().safeParse(data);
   if (!result.success) {
     return Response.json({ error: result.error.message }, { status: 400 });
   }
 
   const updated = await updateProjectBySlug(slug, result.data);
-  if (!updated) { return NotFoundResponse }
+  if (!updated) { return Response.json(null, { status: 404 }) }
 
   return Response.json(updated, {
     status: 200,

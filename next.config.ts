@@ -38,7 +38,8 @@ const nextConfig: NextConfig = {
     svgLoader.exclude = /\.svg$/i;
 
     return config;
-  }
+  },
+  serverExternalPackages: ['libsql']
 };
 
 export default nextConfig;

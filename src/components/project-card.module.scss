@@ -1,6 +1,7 @@
 .project {
   display: block;
 
+  background-color: #fff;
   border: 1px dashed #ddd;
   border-radius: .5rem;
   overflow: hidden;
@@ -15,6 +16,14 @@
 
     transform: translate(0, -2rem) rotate(-5deg);
     z-index: 1;
+
+    :global(.project-thumbnail.floral-pattern) {
+      filter: grayscale(0);
+    }
+  }
+
+  :global(.project-thumbnail.floral-pattern) {
+    filter: grayscale(1);
   }
 }
 

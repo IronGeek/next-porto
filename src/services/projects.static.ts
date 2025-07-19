@@ -1,36 +1,6 @@
-import { z } from 'zod';
-import { projects } from '@/data/projects';
+import { projects } from '@/models/projects';
 
-import type { Project } from '@/data/projects';
-
-const projectSchema = z.object({
-  id: z.uuid(),
-  name: z.string(),
-  slug: z.string().optional(),
-
-  description: z.string(),
-  summary: z.string(),
-
-  role: z.string(),
-  technologies: z.array(z.string()),
-
-  images: z.array(z.string()).optional(),
-  thumbnail: z.string()
-});
-
-
-interface ProjectWithMeta extends Project {
-  meta? : {
-    prev: Project | null
-    next: Project | null
-  }
-}
-
-const getProjectsEndpoint = (slug?: string | string[]): string => {
-  const path = Array.isArray(slug) ? slug.join('/') : slug;
-
-  return path ? `/api/projects/${path}` : `/api/projects`;
-}
+import type { Project, ProjectWithMeta } from '@/models/projects/types';
 
 const createProject = async (project: Project): Promise<Project | null> => {
   if (!project) { return null }
@@ -85,8 +55,4 @@ const updateProjectBySlug = async (slug: string, updates: Partial<Project>): Pro
   return updated;
 }
 
-export { projectSchema,
-  getProjectsEndpoint, createProject, getProjects, getProjectBySlug, deleteProjectBySlug, updateProjectBySlug
-};
-
-export type { Project, ProjectWithMeta }
+export { createProject, getProjects, getProjectBySlug, deleteProjectBySlug, updateProjectBySlug };

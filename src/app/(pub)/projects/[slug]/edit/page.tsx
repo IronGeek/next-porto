@@ -9,8 +9,11 @@ import { Main } from '@/components/main';
 import { Error } from '@/components/error';
 import { ProjectForm } from '@/components/project-form';
 import { SaveIcon, CancelIcon } from '@/ui/icons';
-import { fetcher, FetchError, revalidator } from '@/lib/fetch';
-import { getProjectsEndpoint, Project, projectSchema } from '@/lib/projects';
+import { fetcher, FetchError, fetchStrategy, revalidator } from '@/lib/fetch';
+import { getApiEndpoint } from '@/models/projects';
+import { ProjectSchema } from '@/models/projects/schema';
+
+import type { Project } from '@/models/projects/types';
 
 const submitForm = async (state: { slug: string, submitted: boolean}, context: FormData) => {
   const entity = {
@@ -22,7 +25,7 @@ const submitForm = async (state: { slug: string, submitted: boolean}, context: F
     technologies: context.get('technologies').toString().split(',').map((s) => s.trim()),
   };
 
-  const { error, data } = await projectSchema.partial().safeParseAsync(entity);
+  const { error, data } = await ProjectSchema.partial().safeParseAsync(entity);
   if (error) {
     console.error('Form submission failed:', error);
 
@@ -34,17 +37,17 @@ const submitForm = async (state: { slug: string, submitted: boolean}, context: F
 
   const thumbnail = context.get('thumbnail');
   if (thumbnail instanceof File && thumbnail.size > 0) {
-    console.log('thumbnail', thumbnail);
     formData.append('thumbnail', thumbnail);
   }
 
   const images = context.get('images');
   if (images instanceof File && images.size > 0) {
+    // TODO
     console.log('images', images);
   }
 
   try {
-    await fetch(getProjectsEndpoint(state.slug), { method: 'POST', body: formData });
+    await fetch(getApiEndpoint(state.slug), { method: 'POST', body: formData });
 
     await mutate(revalidator(/^\/projects/u));
 
@@ -58,8 +61,8 @@ const submitForm = async (state: { slug: string, submitted: boolean}, context: F
 
 const ProjectEditPage = () => {
   const { slug } = useParams()
-  const apiURL = getProjectsEndpoint(slug as string);
-  const { data, error, isLoading } = useSWR<Project>(apiURL, fetcher.json<Project>);
+  const apiURL = getApiEndpoint(slug as string);
+  const { data, error, isLoading } = useSWR<Project>(apiURL, fetcher.json<Project>, fetchStrategy.default);
   const [ state, formAction, isPending] = useActionState(submitForm, { slug, submitted: false });
 
   useEffect(() => {

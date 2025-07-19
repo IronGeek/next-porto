@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import styles from './project-card.module.scss';
+import { FloralImage } from '@/ui/images/client';
 
 import type { ComponentProps } from 'react';
-import type { Project } from '@/lib/projects';
-import Link from 'next/link';
+import type { Project } from '@/models/projects/types';
+
+import styles from './project-card.module.scss';
 
 type ProjectCardProps = ComponentProps<'div'> & {
   readonly data: Project
@@ -16,7 +18,9 @@ const ProjectCard = ({ className, data, ...props }: ProjectCardProps) => {
 
   return (
     <div {...props} className={clsx(styles.project, className)}>
-      <Image alt={data.name} src={data.thumbnail} width={300} height={300} />
+      { data.thumbnail
+        ? <Image className="project-thumbnail" alt={data.name} src={data.thumbnail} width={300} height={300} />
+        : <FloralImage className="project-thumbnail floral-pattern w-[300px] h-[300px]" updateInterval={333} />}
       <div className={styles.project_body}>
         <Link href={href}>
           <div className={styles.project_name}>{data.name}</div>

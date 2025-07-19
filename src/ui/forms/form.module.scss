@@ -93,31 +93,3 @@
     font-size: .625em
   }
 }
-
-.form_header {
-  margin: -2rem -2rem 2rem -2rem;
-  padding: 1rem 2rem;
-
-  &:empty {
-    display: none;
-  }
-
-  :global(.form-title) {
-    font-size: 1.75rem;
-  }
-
-  :global(.form-description) {
-    font-size: 1.125rem;
-    color: #666;
-  }
-
-  :global(.form-actions) {
-    &:empty {
-      display: none;
-    }
-  }
-}
-
-.form_grid {
-  display: grid;
-}
